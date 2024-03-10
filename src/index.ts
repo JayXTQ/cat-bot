@@ -8,6 +8,8 @@ import { Client as PGClient } from "pg";
 import { CronJob } from "cron";
 import { daily } from "./dailies";
 import express, { Response } from "express";
+import { servers } from "../db/schema";
+import { eq } from "drizzle-orm";
 
 const app = express();
 
@@ -48,6 +50,10 @@ client.on("interactionCreate", async (interaction) => {
     const command = commands.get(interaction.commandName);
     if (!command) return;
     await command.run(interaction);
+});
+
+client.on("guildDelete", async (guild) => {
+    db.delete(servers).where(eq(servers.id, guild.id));
 });
 
 new CronJob(
