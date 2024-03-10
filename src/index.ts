@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { Client, GatewayIntentBits } from "discord.js";
+import { ActivityType, Client, GatewayIntentBits } from "discord.js";
 import path from "node:path";
 import fs from "node:fs";
 import { Command } from "./types";
@@ -43,6 +43,15 @@ client.on("ready", async () => {
     console.log(
         `Bot is in servers with id: ${client.guilds.cache.map((guild) => guild.id).join(", ")}, it has now started`,
     );
+
+    client.user.setPresence({
+        activities: [
+            {
+                name: "for /meow",
+                type: ActivityType.Watching,
+            }
+        ]
+    })
 });
 
 client.on("interactionCreate", async (interaction) => {
