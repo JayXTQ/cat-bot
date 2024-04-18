@@ -96,7 +96,7 @@ export async function cat_fact(): Promise<string> {
         const fahrenheit = parseInt(factSplit[index - 2]);
         factSplit[index] = "Celsius";
         factSplit[index - 2] = Math.round((parseInt(factSplit[index - 2]) - 32) * 5 / 9).toString();
-        factSplit[index + 1] = `(${fahrenheit} degrees Fahrenheit)`
+        factSplit[index + 1] = `(${fahrenheit} degrees Fahrenheit)` + factSplit[index + 1];
         fact = factSplit.join(" ");
     }
     return (await axios.get("https://catfact.ninja/fact")).data.fact;
