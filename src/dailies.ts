@@ -89,6 +89,16 @@ export async function cat_image(db: NodePgDatabase): Promise<string> {
 }
 
 export async function cat_fact(): Promise<string> {
+    let fact: string = (await axios.get("https://catfact.ninja/fact")).data.fact;
+    if(fact.toLowerCase().includes("fahrenheit")) {
+        const factSplit = fact.split(" ");
+        const index = factSplit.indexOf("fahrenheit");
+        const fahrenheit = parseInt(factSplit[index - 2]);
+        factSplit[index] = "Celsius";
+        factSplit[index - 2] = Math.round((parseInt(factSplit[index - 2]) - 32) * 5 / 9).toString();
+        factSplit[index + 1] = `(${fahrenheit} degrees Fahrenheit)`
+        fact = factSplit.join(" ");
+    }
     return (await axios.get("https://catfact.ninja/fact")).data.fact;
 }
  
