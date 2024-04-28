@@ -7,7 +7,7 @@ import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
 import { Client as PGClient } from 'pg';
 import { CronJob } from 'cron';
 import { daily } from './dailies';
-import express, { Response } from 'express';
+import express, { Response, Request } from 'express';
 import { servers } from '../db/schema';
 import { eq } from 'drizzle-orm';
 
@@ -77,8 +77,7 @@ new CronJob(
     'utc'
 ); // i hope this runs honestly :sob:
 
-app.get('/', (res: Response) => {
-    res.status(200)
+app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
 });
 
