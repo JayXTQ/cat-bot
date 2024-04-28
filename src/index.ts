@@ -78,6 +78,7 @@ new CronJob(
 ); // i hope this runs honestly :sob:
 
 app.get('/', (res: Response) => {
+    res.status(200)
     res.send('Hello World!');
 });
 
