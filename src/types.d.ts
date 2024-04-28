@@ -1,4 +1,7 @@
-import { ApplicationCommandOption, ChatInputCommandInteraction } from "discord.js";
+import {
+    ApplicationCommandOption,
+    ChatInputCommandInteraction,
+} from 'discord.js';
 
 export type Command = {
     name: string;
@@ -8,4 +11,4 @@ export type Command = {
     run: (interaction: ChatInputCommandInteraction) => Promise<unknown>;
 };
 
-export type CommandNoRun = Omit<Command, "run">;
+export type CommandNoRun = Omit<Command, 'run'>;

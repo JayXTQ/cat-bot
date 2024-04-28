@@ -1,19 +1,19 @@
-import { Command } from "../types";
-import { cat_image } from "../dailies";
-import { AttachmentBuilder, BufferResolvable } from "discord.js";
-import { db } from "../index";
-import { Stream } from "stream";
-import { catImagesCache } from "../../db/schema";
+import { Command } from '../types';
+import { cat_image } from '../utils';
+import { AttachmentBuilder, BufferResolvable } from 'discord.js';
+import { db } from '../index';
+import { Stream } from 'stream';
+import { catImagesCache } from '../../db/schema';
 
 const cooldown = new Set();
 
 export default {
-    name: "catimage",
-    description: "Get a random cat image, right here, right meow :3",
+    name: 'catimage',
+    description: 'Get a random cat image, right here, right meow :3',
     run: async (interaction) => {
         if (cooldown.has(interaction.user.id)) {
             return interaction.reply(
-                "Wait a bit before using this command again :3",
+                'Wait a bit before using this command again :3'
             );
         }
 
@@ -26,8 +26,8 @@ export default {
             imageUrl = await cat_image(db);
         } catch (error) {
             console.error(
-                "Error fetching new image from API, trying cache:",
-                error,
+                'Error fetching new image from API, trying cache:',
+                error
             );
             try {
                 type CatImagesCache = {
@@ -41,8 +41,8 @@ export default {
 
                 imageUrl = cacheResult.url;
             } catch (cacheError) {
-                console.error("Error fetching image from cache:", cacheError);
-                imageUrl = "fallbackImageUrl";
+                console.error('Error fetching image from cache:', cacheError);
+                imageUrl = 'fallbackImageUrl';
             }
         }
 
