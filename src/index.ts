@@ -77,7 +77,7 @@ new CronJob(
     "utc",
 ); // i hope this runs honestly :sob:
 
-app.get("/", async (res: Response) => {
+app.get("/", async (_, res: Response) => {
     res.send(
         `
         <link rel="icon" href="${(await client.users.fetch(process.env.CLIENT_ID)).displayAvatarURL()}" />
