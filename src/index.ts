@@ -83,7 +83,7 @@ app.get("/", async (_, res: Response) => {
         <link rel="icon" href="${(await client.users.fetch(process.env.CLIENT_ID)).displayAvatarURL()}" />
 <p>Hello World!</p>
 
-<p>There is nothing to look at here, please check out my<a href="https://github.com/JayXTQ/cat-bot">source code</a>!</p>
+<p>There is nothing to look at here, please check out my <a href="https://github.com/JayXTQ/cat-bot">source code</a>!</p>
 
 <p>All images used are owned by their respective owners, I do not own any of them. They are set via the random daily cat image.</p>`,
     );
