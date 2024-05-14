@@ -1,50 +1,50 @@
-import { Command } from '../types';
-import { EmbedBuilder } from 'discord.js';
-import { db } from '..';
-import { servers } from '../../db/schema';
-import { eq } from 'drizzle-orm';
+import { Command } from "../types";
+import { EmbedBuilder } from "discord.js";
+import { db } from "..";
+import { servers } from "../../db/schema";
+import { eq } from "drizzle-orm";
 
 const choices = [
     {
-        name: 'Fact Channel (use channel_value to set)',
-        value: 'fact_channel',
+        name: "Fact Channel (use channel_value to set)",
+        value: "fact_channel",
     },
     {
-        name: 'Photos Channel (use channel_value to set)',
-        value: 'photo_channel',
+        name: "Photos Channel (use channel_value to set)",
+        value: "photo_channel",
     },
     {
-        name: 'Send Facts (use boolean_value to set)',
-        value: 'send_facts',
+        name: "Send Facts (use boolean_value to set)",
+        value: "send_facts",
     },
     {
-        name: 'Send Photos (use boolean_value to set)',
-        value: 'send_photos',
+        name: "Send Photos (use boolean_value to set)",
+        value: "send_photos",
     },
 ];
 
 export default {
-    name: 'config',
+    name: "config",
     description: "Get and set the bot's config for your server",
     options: [
         {
-            name: 'option',
+            name: "option",
             required: false,
             type: 3,
-            description: 'The option to set',
+            description: "The option to set",
             choices,
         },
         {
-            name: 'channel_value',
+            name: "channel_value",
             required: false,
             type: 7,
-            description: 'The channel to set the option to',
+            description: "The channel to set the option to",
         },
         {
-            name: 'boolean_value',
+            name: "boolean_value",
             required: false,
             type: 5,
-            description: 'The value to set the option to, true/false or yes/no',
+            description: "The value to set the option to, true/false or yes/no",
         },
     ],
     dm_permission: false,
@@ -56,10 +56,10 @@ export default {
         )
             return interaction.reply({
                 content:
-                    'You need to have the manage server permission to use this command',
+                    "You need to have the manage server permission to use this command",
                 ephemeral: true,
             });
-        const option = interaction.options.getString('option', false);
+        const option = interaction.options.getString("option", false);
         if (!option) {
             let record = (
                 await db
@@ -76,30 +76,30 @@ export default {
                     send_photos: false,
                 };
             const embed = new EmbedBuilder()
-                .setTitle('Server Config')
+                .setTitle("Server Config")
                 .addFields(
                     Object.keys(record)
-                        .filter((key) => key !== 'id')
+                        .filter((key) => key !== "id")
                         .map((key) => {
                             return {
                                 name:
                                     choices
                                         .find((c) => c.value === key)
-                                        ?.name.split(' (')[0] || key,
-                                value: String(record[key] ?? 'Not set'),
+                                        ?.name.split(" (")[0] || key,
+                                value: String(record[key] ?? "Not set"),
                             };
-                        })
+                        }),
                 )
                 .setFooter({
-                    text: 'Use /config and specify an option to set it',
+                    text: "Use /config and specify an option to set it",
                 });
             await interaction.reply({ embeds: [embed] });
         }
         switch (option) {
-            case 'fact_channel': {
+            case "fact_channel": {
                 const channel = interaction.options.getChannel(
-                    'channel_value',
-                    true
+                    "channel_value",
+                    true,
                 );
                 if (!channel) return;
                 await db
@@ -113,14 +113,14 @@ export default {
                         target: servers.id,
                     });
                 await interaction.reply({
-                    content: `Set fact channel to ${channel}`,
+                    content: `Set fact channel to <#${channel.id}>`,
                 });
                 break;
             }
-            case 'photo_channel': {
+            case "photo_channel": {
                 const channel = interaction.options.getChannel(
-                    'channel_value',
-                    true
+                    "channel_value",
+                    true,
                 );
                 if (!channel) return;
                 await db
@@ -134,14 +134,14 @@ export default {
                         target: servers.id,
                     });
                 await interaction.reply({
-                    content: `Set photo channel to ${channel}`,
+                    content: `Set photo channel to <#${channel.id}>`,
                 });
                 break;
             }
-            case 'send_facts': {
+            case "send_facts": {
                 const value = interaction.options.getBoolean(
-                    'boolean_value',
-                    true
+                    "boolean_value",
+                    true,
                 );
                 if (!value) return;
                 await db
@@ -159,10 +159,10 @@ export default {
                 });
                 break;
             }
-            case 'send_photos': {
+            case "send_photos": {
                 const value = interaction.options.getBoolean(
-                    'boolean_value',
-                    true
+                    "boolean_value",
+                    true,
                 );
                 if (!value) return;
                 await db
