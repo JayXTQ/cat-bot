@@ -56,3 +56,11 @@ export async function cat_fact(): Promise<string> {
     }
     return (await axios.get('https://catfact.ninja/fact')).data.fact;
 }
+
+export async function getBuffer(url: string) {
+    return await axios
+        .get(url, {
+            responseType: 'arraybuffer',
+        })
+        .then((response) => Buffer.from(response.data));
+}

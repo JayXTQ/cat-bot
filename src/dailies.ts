@@ -3,18 +3,14 @@ import { servers } from '../db/schema';
 import { Client, TextChannel } from 'discord.js';
 import axios from 'axios';
 import 'dotenv/config';
-import { cat_fact, cat_image } from './utils';
+import {cat_fact, cat_image, getBuffer} from './utils';
 
 export async function daily(db: NodePgDatabase, client: Client) {
     const res = await db.select().from(servers);
     if (!res) return;
     const fact = await cat_fact();
     const image = await cat_image(db);
-    const imageBuffer = await axios
-        .get(image, {
-            responseType: 'arraybuffer',
-        })
-        .then((response) => Buffer.from(response.data));
+    const imageBuffer = await getBuffer(image)
 
     try {
         await client.user?.setAvatar(imageBuffer);
