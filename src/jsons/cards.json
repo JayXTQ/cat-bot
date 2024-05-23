@@ -28,5 +28,23 @@
         "origin": "Pat Sullivan & Otto Messmer",
         "text": "flat-ass old-ass cat",
         "image_url": "https://files.catbox.moe/tdxb0b.png"
+    },
+    {
+        "name": "Luna",
+        "origin": "TikTok Cat",
+        "text": "High mental IQ",
+        "image_url": "https://files.catbox.moe/djq89q.png"
+    },
+    {
+        "name": "Cheshire Cat",
+        "origin": "Lewis Carroll",
+        "text": "spooky surveillance cat",
+        "image_url": "https://files.catbox.moe/b6ul7d.png"
+    },
+    {
+        "name": "Crunchycat",
+        "origin": "@monkeycatluna on TikTok",
+        "text": "Crunch",
+        "image_url": "https://files.catbox.moe/5eci2d.png"
     }
 ]
