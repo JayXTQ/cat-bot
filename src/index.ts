@@ -10,6 +10,7 @@ import { daily } from "./dailies";
 import express, { Response, Request } from "express";
 import { servers } from "../db/schema";
 import { eq } from "drizzle-orm";
+import https from "https";
 
 const app = express();
 
@@ -82,6 +83,9 @@ app.get("/", async (_, res: Response) => {
     );
 });
 
-app.listen(process.env.PORT || 3000);
+process.env.DEV === '0' ? https.createServer({
+    key: fs.readFileSync('./certs/key.pem'),
+    cert: fs.readFileSync('./certs/cert.pem'),
+}, app).listen(process.env.PORT || 3000) : app.listen(process.env.PORT || 3000);
 
 client.login(process.env.TOKEN);
