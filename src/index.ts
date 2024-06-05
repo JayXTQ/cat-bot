@@ -83,9 +83,6 @@ app.get("/", async (_, res: Response) => {
     );
 });
 
-process.env.DEV === '0' ? https.createServer({
-    key: fs.readFileSync('./certs/key.pem'),
-    cert: fs.readFileSync('./certs/cert.pem'),
-}, app).listen(process.env.PORT || 3000, () => console.log('HTTPS server')) : app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000);
 
 client.login(process.env.TOKEN);
