@@ -3,8 +3,8 @@ import { ActivityType, Client, GatewayIntentBits } from "discord.js";
 import path from "node:path";
 import fs from "node:fs";
 import { Command } from "./types";
-import { NodePgDatabase, drizzle } from "drizzle-orm/node-postgres";
-import { Client as PGClient } from "pg";
+import { drizzle } from "drizzle-orm/planetscale-serverless";
+import { Client as psClient } from "@planetscale/database"
 import { CronJob } from "cron";
 import { daily } from "./dailies";
 import express, { Response, Request } from "express";
@@ -17,22 +17,15 @@ const client = new Client({
     intents: [GatewayIntentBits.GuildMessages],
 });
 
-export let db: NodePgDatabase;
+const ps = new psClient({
+    url: process.env.DATABASE_URL
+});
+
+export let db = drizzle(ps);
 
 export const commands = new Map<string, Command>();
 
 client.on("ready", async () => {
-    const pgClient = new PGClient({
-        connectionString: process.env.DATABASE_URL,
-        ssl: {
-            rejectUnauthorized: false,
-        },
-    });
-
-    await pgClient.connect();
-
-    db = drizzle(pgClient);
-
     for (const file of fs.readdirSync(
         path.join(process.cwd(), "/src/commands"),
     )) {

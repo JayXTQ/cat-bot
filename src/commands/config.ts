@@ -108,10 +108,6 @@ export default {
                         id: interaction.guildId as string,
                         fact_channel: channel.id,
                     })
-                    .onConflictDoUpdate({
-                        set: { fact_channel: channel.id },
-                        target: servers.id,
-                    });
                 await interaction.reply({
                     content: `Set fact channel to <#${channel.id}>`,
                 });
@@ -129,10 +125,6 @@ export default {
                         id: interaction.guildId as string,
                         photo_channel: channel.id,
                     })
-                    .onConflictDoUpdate({
-                        set: { photo_channel: channel.id },
-                        target: servers.id,
-                    });
                 await interaction.reply({
                     content: `Set photo channel to <#${channel.id}>`,
                 });
@@ -150,10 +142,6 @@ export default {
                         id: interaction.guildId as string,
                         send_facts: value,
                     })
-                    .onConflictDoUpdate({
-                        set: { send_facts: value },
-                        target: servers.id,
-                    });
                 await interaction.reply({
                     content: `Set send facts to ${value}`,
                 });
@@ -171,10 +159,6 @@ export default {
                         id: interaction.guildId as string,
                         send_photos: value,
                     })
-                    .onConflictDoUpdate({
-                        set: { send_photos: value },
-                        target: servers.id,
-                    });
                 await interaction.reply({
                     content: `Set send photos to ${value}`,
                 });
