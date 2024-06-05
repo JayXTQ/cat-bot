@@ -1,6 +1,6 @@
-import { mysqlTable, text, boolean, serial } from "drizzle-orm/mysql-core";
+import { pgTable, text, boolean, serial } from "drizzle-orm/pg-core";
 
-export const servers = mysqlTable("servers", {
+export const servers = pgTable("servers", {
     id: text("id").primaryKey(),
     fact_channel: text("fact_channel"),
     photo_channel: text("photo_channel"),
@@ -8,7 +8,7 @@ export const servers = mysqlTable("servers", {
     send_photos: boolean("send_photos").default(false),
 });
 
-export const catImagesCache = mysqlTable("cat_images_cache", {
+export const catImagesCache = pgTable("cat_images_cache", {
     id: serial("id").primaryKey(),
     url: text("url").notNull().unique(),
 });

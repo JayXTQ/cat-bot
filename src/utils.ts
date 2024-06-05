@@ -1,9 +1,8 @@
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import axios from 'axios';
 import { catImagesCache } from '../db/schema';
-import {PlanetScaleDatabase} from "drizzle-orm/planetscale-serverless";
 
-export async function cat_image(db: PlanetScaleDatabase): Promise<string> {
+export async function cat_image(db: NodePgDatabase): Promise<string> {
     try {
         const response = await axios.get(
             'https://api.thecatapi.com/v1/images/search',
@@ -16,6 +15,7 @@ export async function cat_image(db: PlanetScaleDatabase): Promise<string> {
         await db
             .insert(catImagesCache)
             .values({ url: newImageUrl })
+            .onConflictDoNothing();
 
         return newImageUrl;
     } catch (error) {

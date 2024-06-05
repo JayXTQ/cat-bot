@@ -4,9 +4,8 @@ import { Client, TextChannel } from 'discord.js';
 import axios from 'axios';
 import 'dotenv/config';
 import {cat_fact, cat_image, getBuffer} from './utils';
-import {PlanetScaleDatabase} from "drizzle-orm/planetscale-serverless";
 
-export async function daily(db: PlanetScaleDatabase, client: Client) {
+export async function daily(db: NodePgDatabase, client: Client) {
     const res = await db.select().from(servers);
     if (!res) return;
     const fact = await cat_fact();
