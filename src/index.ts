@@ -24,10 +24,7 @@ export const commands = new Map<string, Command>();
 
 client.on("ready", async () => {
     const pgClient = new PGClient({
-        connectionString: process.env.DATABASE_URL,
-        ssl: {
-            rejectUnauthorized: false,
-        },
+        connectionString: process.env.DATABASE_URL
     });
 
     await pgClient.connect();
