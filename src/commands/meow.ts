@@ -27,7 +27,7 @@ export default {
                 },
                 {
                     name: "Support me!",
-                    value: "Thank you for using this bot, if you would like I have a Ko-Fi page which you can donate to, there is 0 benefits to any of my products but it will help me out a lot! https://ko-fi.com/jxtq. Also check out my website https://jayxtq.xyz",
+                    value: "Thank you for using this bot, if you would like I have a Ko-Fi page which you can donate to, there is 0 benefits to any of my products but it will help me out a lot! https://ko-fi.com/jxtq. Also check out my website https://jxtq.moe",
                 },
             ])
             .setFooter({ text: "Made with love, by Jay <3" });
