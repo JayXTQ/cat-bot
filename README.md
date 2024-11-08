@@ -4,7 +4,7 @@ The public repository for the "Cat" bot on Discord, made by [Jay](https://jayxtq
 
 I am already hosting this bot for public use if you don't want to host it yourself, this repository only exists just to show the code and allow others to contribute to the bot if they wish to do so.
 
-Here is the invite link: https://discord.com/oauth2/authorize?client_id=1215749607657836606&permissions=51200&scope=bot+applications.commands
+Here is the invite link: https://discord.com/oauth2/authorize?client_id=1215749607657836606
 
 ## Features
 
