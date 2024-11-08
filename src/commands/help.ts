@@ -5,6 +5,8 @@ import { EmbedBuilder } from 'discord.js';
 export default {
     name: 'help',
     description: 'Get help with the bot',
+    contexts: [0, 1, 2],
+    integration_types: [0, 1],
     run: async (interaction) => {
         const embed = new EmbedBuilder()
             .setTitle('Help')

@@ -10,6 +10,8 @@ const cooldown = new Set();
 export default {
     name: 'catimage',
     description: 'Get a random cat image, right here, right meow :3',
+    contexts: [0, 1, 2],
+    integration_types: [0, 1],
     run: async (interaction) => {
         if (cooldown.has(interaction.user.id)) {
             return interaction.reply(

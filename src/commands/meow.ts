@@ -4,6 +4,8 @@ import { EmbedBuilder } from "discord.js";
 export default {
     name: "meow",
     description: "Meow! Here is some information :3",
+    contexts: [0, 1, 2],
+    integration_types: [0, 1],
     run: async (interaction) => {
         const embed = new EmbedBuilder()
             .setTitle("Meow!")
@@ -31,6 +33,6 @@ export default {
                 },
             ])
             .setFooter({ text: "Made with love, by Jay <3" });
-        await interaction.reply({ embeds: [embed] });
+        await interaction.reply({ embeds: [embed], ephemeral: true });
     },
 } satisfies Command;

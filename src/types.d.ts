@@ -8,6 +8,8 @@ export type Command = {
     description: string;
     options?: ApplicationCommandOption[];
     dm_permission?: boolean;
+    contexts?: number[];
+    integration_types?: number[];
     run: (interaction: ChatInputCommandInteraction) => Promise<unknown>;
 };
 

@@ -11,6 +11,8 @@ export default {
             required: false,
         },
     ],
+    contexts: [0, 1, 2],
+    integration_types: [0, 1],
     run: async (interaction) => {
         const statusCodes = [
             100, 101, 102, 103, 200, 201, 202, 203, 204, 205, 206, 207, 208,
