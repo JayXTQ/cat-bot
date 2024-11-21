@@ -1,6 +1,6 @@
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { servers } from '../db/schema';
-import { Client, TextChannel } from 'discord.js';
+import {AttachmentBuilder, Client, TextChannel} from 'discord.js';
 import axios from 'axios';
 import 'dotenv/config';
 import {cat_fact, cat_image, getBuffer} from './utils';
@@ -48,7 +48,8 @@ export async function daily(db: NodePgDatabase, client: Client) {
                         guildInfo.photo_channel
                     )) as TextChannel | null) || undefined;
             if (!photo_channel) break;
-            await photo_channel.send(`[Your daily cat image! : 3](${image})`);
+            const attachment = new AttachmentBuilder(imageBuffer, { name: 'daily-cat-img.png' });
+            await photo_channel.send({ files: [attachment] });
         }
     }
 }
