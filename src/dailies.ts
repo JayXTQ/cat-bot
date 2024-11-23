@@ -11,6 +11,7 @@ export async function daily(db: NodePgDatabase, client: Client) {
     const fact = await cat_fact();
     const image = await cat_image(db);
     const imageBuffer = await getBuffer(image)
+    const attachment = new AttachmentBuilder(image);
 
     try {
         await client.user?.setAvatar(imageBuffer);
@@ -48,7 +49,6 @@ export async function daily(db: NodePgDatabase, client: Client) {
                         guildInfo.photo_channel
                     )) as TextChannel | null) || undefined;
             if (!photo_channel) break;
-            const attachment = new AttachmentBuilder(image);
             await photo_channel.send({ files: [attachment] });
         }
     }
